@@ -11,7 +11,19 @@
       "schematics": {
         "@schematics/angular": {
           "component": {
+            "type": "component",
             "changeDetection": "OnPush"
+          },
+          "service": {
+            "type": "service",
+            "providedIn": "root"
+          },
+          "directive": {
+            "type": "directive"
+          },
+          "pipe": {
+            "type": "pipe",
+            "typeSeparator": "."
           }
         }
       },
