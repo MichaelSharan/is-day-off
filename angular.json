@@ -15,8 +15,7 @@
             "changeDetection": "OnPush"
           },
           "service": {
-            "type": "service",
-            "providedIn": "root"
+            "type": "service"
           },
           "directive": {
             "type": "directive"
