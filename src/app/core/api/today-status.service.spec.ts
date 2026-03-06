@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TodayStatusService } from './today-status.service';
-import { TodayStatuses } from './api.model';
 
 describe('TodayStatusService', () => {
   let service: TodayStatusService;
@@ -18,26 +17,56 @@ describe('TodayStatusService', () => {
   it('should tell that Wednesday in Russia is not a day off', () => {
     return new Promise<void>(resolve => {
       service.isDayOff(new Date('2023-10-11'), 'ru').subscribe(status => {
-        console.log(status)
-        expect(status).toBe(TodayStatuses.workingDay);
+        expect(status).toBe(false);
         resolve();
       });
     })
   });
 
   it('should tell that Sunday in Russia is a day off', () => {
-    expect(service.isDayOff(new Date('2023-10-15'), 'ru')).toBe(true);
+    return new Promise<void>(resolve => {
+      service.isDayOff(new Date('2023-10-15'), 'ru').subscribe(status => {
+        expect(status).toBe(true);
+        resolve();
+      });
+    })
   });
 
   it('should tell that 1st of January in Russia is a day off', () => {
-    expect(service.isDayOff(new Date('2024-01-01'), 'ru')).toBe(true);
+    return new Promise<void>(resolve => {
+      service.isDayOff(new Date('2024-01-01'), 'ru').subscribe(status => {
+        console.log(status)
+        expect(status).toBe(true);
+        resolve();
+      });
+    })
   });
 
   it('should throw an error if the date is invalid', () => {
-    expect(() => service.isDayOff(new Date('invalid-date'), 'ru')).toThrowError('Invalid date');
+    return new Promise<void>(resolve => {
+      service.isDayOff(new Date('invalid-date'), 'ru').subscribe({
+        error: err => {
+          expect(err.message).toBe('Invalid date');
+          resolve();
+        },
+        next: () => {
+          expect.fail('Expected an error to be thrown for invalid date');
+        }
+      });
+    });
   });
 
   it('should throw an error if the country code is invalid', () => {
-    expect(() => service.isDayOff(new Date('2023-10-12'), 'invalid-country')).toThrowError('Unsupported country code');
+    return new Promise<void>(resolve => {
+      service.isDayOff(new Date('2023-10-12'), 'invalid-country').subscribe({
+        error: err => {
+          expect(err.message).toBe('Unsupported country code');
+          resolve();
+        },
+        next: () => {
+          expect.fail('Expected an error to be thrown for invalid country code');
+        }
+      });
+    });
   });
 });
