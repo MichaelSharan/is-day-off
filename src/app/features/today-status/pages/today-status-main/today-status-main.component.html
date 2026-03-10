@@ -1,3 +1,9 @@
-<h1 class="title">Сегодня выходной?</h1>
-<span class="date">{{today | date: 'dd MMMM'}}</span>
-<span class="status">Сегодня {{ dateStatus() }}</span>
+<div class="flex flex-col items-center gap-4">
+    <div class="flex flex-col items-center gap-4">
+        <h1 class="title text-4xl">Сегодня выходной?</h1>
+        <span class="date text-lg">Дата: {{today | date: 'dd MMMM'}}</span>
+    </div>
+    <div class="background rounded-lg p-4 bg-red-50">
+        <span class="status text-lg">Сегодня {{ dateStatus() }}</span>
+    </div>
+</div>
