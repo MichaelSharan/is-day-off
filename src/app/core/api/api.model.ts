@@ -1,4 +1,4 @@
-export enum TodayStatuses {
+export enum DateStatuses {
     workingDay,
     dayOff,
 }
