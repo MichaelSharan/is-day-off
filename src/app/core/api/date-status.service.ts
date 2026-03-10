@@ -7,7 +7,7 @@ import { TodayStatuses } from './api.model';
 @Injectable({
   providedIn: 'root',
 })
-export class TodayStatusService {
+export class DateStatusService {
   private http = inject(HttpClient);
   private apiUrl = 'https://isdayoff.ru';
 
@@ -21,5 +21,11 @@ export class TodayStatusService {
     const dateString = format(date, 'yyyy-MM-dd');
     return this.http.get<TodayStatuses>(`${this.apiUrl}/${dateString}?cc=${countryCode}`)
       .pipe(map(res => res === TodayStatuses.dayOff))
+  }
+
+  getDateStatusString(date: Date, countryCode: string) {
+    return this.isDayOff(date, countryCode).pipe(
+      map(isOff => `${isOff ? 'выходной' : 'рабочий день'}`)
+    );
   }
 }
