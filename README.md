@@ -1,6 +1,12 @@
 # IsDayOff
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+## Deployment
+
+To deploy on gh pages use 
+
+```bash
+ng deploy --base-href=/is-day-off/
+```
 
 ## Development server
 
